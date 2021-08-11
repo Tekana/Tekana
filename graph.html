@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Tekana</title>
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="color.css">
+<style>
+    div input::-webkit-outer-spin-button,div input::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    div input{
+        width:50px;
+        margin:4px;
+    }
+    div,div p{
+        font-size:25px;
+    }
+</style>
+</head>
+<body style="text-align: center;">
+
+<div>
+    x1 y1 <input type=number id="x1" ><input type=number id="y1"><br>
+    x2 y2 <input type=number id="x2" ><input type=number id="y2"><br>
+    input x <input type="number" id="x"><button type="button" onclick="sub()">CAL</button><br>
+    <p id="m"></p>
+    <p id="y"></p>
+</div>
+
+<script>
+    var x,y,m,c,x1,y1,x2,y2;
+    function sub(){
+        x1 = Number(document.getElementById('x1').value);
+        y1 = Number(document.getElementById('y1').value);
+        x2 = Number(document.getElementById('x2').value);
+        y2 = Number(document.getElementById('y2').value);
+        x = Number(document.getElementById('x').value);
+        m = (y2-y1)/(x2-x1);
+        c = y1-m*x1;
+        y = m*x+c;
+        document.getElementById("m").innerHTML = "f(x) = "+m+"x + "+c;
+        document.getElementById("y").innerHTML = "y = "+y;
+    }
+</script>
+
+</body>

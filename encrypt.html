@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tekana</title>
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="color.css">
+<style>
+	ta table tr th{
+		padding:10px;
+		font-size:32px;
+	}
+	ta table{
+		border-radius: 15px;
+		width: 88%;
+		height: 80px;
+		margin-left:6%;
+		margin-top:20px;
+	}
+	ta table tr th{
+		height: 0px;
+		font-size:45px;
+		border-radius: 8px;
+	}
+	ta table tr th:hover{
+		background-color: transparent;
+		transition:0s;
+	}
+	* strong{
+		font-size: 40px;
+	}
+</style>
+</head>
+<body>
+
+<br>
+<ta>
+<table style="background-color: transparent;">
+	<tr>
+		<th><strong>Encrypt</strong></th>
+		<th><strong>Decrypt</strong></th>
+	</tr>
+	<tr>
+		<th><input type="text" id="sen"> <button onclick="en()">Encrypt</button></th>
+		<th><input type="text" id="sde"> <button onclick="de()">Decrypt</button></th>
+	</tr>
+	<tr>
+		<th><p2 id="eno"></p2></th>
+		<th><p2 id="deo"></p2></th>
+	</tr>
+</table>
+</ta>
+<p1 id="test"></p1>
+</body>
+<script type="text/javascript">
+	var x,n,i,err;
+	var c = [];
+	var ii = [3,6,1,7,2,9]
+	function en() {
+		c = [];
+		err = 0;
+		x = document.getElementById("sen").value;
+		n = x.length;
+		var key = 1;
+		for(i = 0;i < n;i++){
+			var tem = x[i].charCodeAt(0);//-47
+			if(tem >= 97 && tem <= 122) tem -= 32;
+			if(tem >= 48 && tem <= 90 && tem != 60 && tem != 62 || tem == 32){
+				if(tem == 32) c.push(0);
+				else c.push(tem-47);
+			}
+			else err=1;
+			key = key*c[i]+ii[i%6]*i+3;
+			key%=44;
+		}
+		for(i = 0;i < n;i++){
+			if(i%2 == 0) c[i] += key+key*i+44*i-ii[i%6];
+			else c[i] = c[i]+44-key-key*i+44*i+ii[i%6];
+			c[i]%= 44;
+		}
+		var check = 0;
+		for(i = 0;i < n;i++){
+			if(i%2==0) check += c[i];
+			else check -= c[i];
+		}
+		check = (check+44)%44;
+		x = [];
+		for(i = 0;i < n;i++){
+			var tt = String.fromCharCode(c[i]+47);
+			if(c[i] == 13) x+="&lt;";
+			else x += tt;
+		}
+		x += String.fromCharCode(key+47);
+		x += String.fromCharCode(check+47);
+		if(err){
+			document.getElementById("eno").innerHTML = "error";
+			document.getElementById("eno").style.color = "red";
+		}
+		else{
+			document.getElementById("eno").innerHTML = x;
+			document.getElementById("eno").style.color = "black";
+		}
+	}
+	function de(){
+		c = [];
+		err = 0;
+		x = document.getElementById("sde").value;
+		n = x.length;
+		for(i = 0;i < n;i++){
+			var tem = x[i].charCodeAt(0);//-47
+			c.push(tem-47);
+		}
+		n-=2;
+		var key = c[n],check = 0;
+		for(i = 0;i < n;i++){
+			if(i%2==0) check += c[i];
+			else check -= c[i];
+		}
+		check = (check+44)%44;
+		if(check != c[n+1]) err = 1;
+
+		for(i = 0;i < n;i++){
+			if(i%2 == 1) c[i] += key+key*i+44*i-ii[i%6];
+			else c[i] = c[i]+44-key-key*i+44*i+ii[i%6];
+			c[i]%= 44;
+		}
+		
+		x = [];
+		for(i = 0;i < n;i++){
+			if(c[i] == 0) x += " ";
+			else x += String.fromCharCode(c[i]+47);
+		}
+		if(err){
+			document.getElementById("deo").innerHTML = "error";
+			document.getElementById("deo").style.color = "red";
+		}
+		else{
+			document.getElementById("deo").innerHTML = x;
+			document.getElementById("deo").style.color = "black";
+		}
+	}
+</script>
+</html>

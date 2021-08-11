@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tekana</title>
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="color.css">
+</head>
+<body style="text-align: center;">
+<br><br><br>
+
+<form id="in">
+	<strong>Input Digit: (1-10)</strong><br><br>
+	<input type="number" id="di" value="0" min="1" max="10">
+	<button type="button" onclick="subd()">Submit</button>
+</form>
+
+
+<form id="g" style="display:none">
+	<strong>Guest the number</strong><br><br>
+	<input type="number" id="a" value="0">
+	<button type="button" onclick="sub()">Submit</button>
+	<p id="l" style="display:none;color:red">Lower</p>
+	<p id="h" style="display:none;color:red">Higher</p>
+	<p id="c" style="display:none;color:#6adb4b">Correct</p>
+	<p id="tr" style="margin: 0 5px;"></p>
+</form>
+
+<script>
+var D = 0,ans,num=0;
+function subd(){
+	D=document.getElementById('di').value;
+	ans = random(Math.pow(10,D-1),Math.pow(10,D)-1);
+	document.getElementById('in').style.display = "none";
+	document.getElementById('g').style.display = "block";
+}
+
+function sub(){
+	var A = document.getElementById('a').value;
+	num++;
+	if(A > ans){
+		document.getElementById('l').style.display = "block";
+		document.getElementById('h').style.display = "none";
+		document.getElementById('c').style.display = "none";
+	}
+	if(A < ans){
+		document.getElementById('l').style.display = "none";
+		document.getElementById('h').style.display = "block";
+		document.getElementById('c').style.display = "none";
+	}
+	if(A == ans){
+		document.getElementById('l').style.display = "none";
+		document.getElementById('h').style.display = "none";
+		document.getElementById('c').style.display = "block";
+		document.getElementById('tr').innerHTML = "Trial = "+num;
+	}
+}
+function random(min, max) {  
+    min = Math.ceil(min); 
+    max = Math.floor(max); 
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
+</script>
+
+</body>
+</html>

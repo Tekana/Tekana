@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'Thai Font';
+    src:url('font/thaisansneue-black.eot');
+    src: url('font/thaisansneue-black.eot?#iefix') format('embedded-opentype'),
+         url('font/thaisansneue-black.woff2') format('woff2'),
+         url('font/thaisansneue-black.woff') format('woff'),
+         url('font/thaisansneue-black.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-family: 'Helvetica', 'Thai Font', sans-serif;
+}
+* button{
+    text-align: center;
+    color: white;
+    padding:8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #aaa;
+    height: 54px;
+    font-size: 32px;
+}
+* button:hover{
+    background-color: #999;
+    transition:0.4s;
+}
+div div ul li button,div div ul li button:visited{
+    color:white;
+    text-decoration: none;
+    height:auto;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #bbb;
+    border-radius: 8px;
+}
+table tr td{
+    height: 0px;
+    font-size:50px;
+    padding: 3px;
+    padding-left:20px;
+}
+table tr:nth-child(even){
+    background-color: #ccc;
+}
+body {
+    background-color: #EEEEEE;
+}
+* input{
+    background-color: white;
+    padding:5px;
+    margin-top:5px;
+    margin-bottom:5px;
+    height: 45px;
+    width: 100px;
+    font-size:30px;
+    border: 2px;
+    border-radius: 5px;
+}

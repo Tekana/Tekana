@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<script type="text/javascript" src="jquery.js"></script>
+<link href="bootstrap.css" rel="stylesheet">
+<link href="bootstrap-switch.css" rel="stylesheet">
+<script type="text/javascript" src="bootstrap-switch.js"></script>
+<head>
+<style>
+table{
+border-collapse: collapse;
+width: 100%;
+}
+a {
+  color:white;
+}
+a:visited {
+  color:white;
+}
+tr {
+  background-color: #dddddd;
+}
+th{
+background-color:#5c8aff;
+padding:15px;
+font-size:40px;
+}
+</style>
+</head>
+
+<body style="background-color:#EEEEEE">
+<div class="row">
+<div class="col-md-12" style="text-align: center">
+<h3>          4 Channel Relay Controller          </h3>
+</div>
+</div>
+<div>
+<table>
+  <tr>
+    <td><label for="relay1"> Relay 1 (PC USB) </label></td>
+    <td><input type="checkbox" name="relay1" id="relay1"checked></td>
+    <td> Current Status:  <span id="feedback1"></span> </td>
+  </tr>
+    <tr>
+    <td><label for="relay2"> Relay 2 (PC B) </label></td>
+    <td><input type="checkbox" name="relay2" id="relay2"checked></td>
+    <td> Current Status:  <span id="feedback2"></span> </td>
+  </tr>
+    <tr>
+    <td><label for="relay3"> Relay 3        </label></td>
+    <td><input type="checkbox" name="relay3" id="relay3"checked></td>
+    <td> Current Status:  <span id="feedback3"></span> </td>
+  </tr>
+    <tr>
+    <td><label for="relay4"> Relay 4        </label></td>
+    <td><input type="checkbox" name="relay4" id="relay4"checked></td>
+    <td> Current Status:  <span id="feedback4"></span> </td>
+  </tr>
+</table>
+</div>
+
+<script type="text/javascript">
+$.fn.bootstrapSwitch.defaults.offColor="danger";
+$("[name='relay1']").bootstrapSwitch();
+$("[name='relay2']").bootstrapSwitch();
+$("[name='relay3']").bootstrapSwitch();
+$("[name='relay4']").bootstrapSwitch();
+
+$(document).ready(function(){
+  $.ajax({
+    method: "POST",
+    url: "firstcheck.php",
+    data: {}
+  })
+  .done(function( msg ) {
+    msg = JSON.parse(msg);
+    msg = JSON.parse(msg);
+
+    for(var i = 0 ; i < 4; i++){
+      if(msg[i] == true){
+        $("#feedback"+(i+1)).html("Turned ON");
+      } else {
+        $("#feedback"+(i+1)).html("Turned OFF");
+      } 
+
+      $("[name='relay"+(i+1)+"']").bootstrapSwitch('state',msg[i]);
+    } 
+});
+});
+
+
+$('input[name="relay1"],'+
+  'input[name="relay2"],'+
+  'input[name="relay3"],'+
+  'input[name="relay4"]').on('switchChange.bootstrapSwitch', function(event, state) {
+
+var relayID = event.target.id.substring(event.target.id.length - 1);
+
+$.ajax({
+  method: "POST",
+  url: "changestate.php",
+  data: { clicked :state , relayId:relayID}
+})
+  .done(function( msg ) {
+
+  if(msg == "true"){
+    $("#feedback"+(relayID)).html("ON");
+  } else {
+    $("#feedback"+(relayID)).html("OFF");
+  } 
+  });
+});
+</script>
+</body>
+</html>

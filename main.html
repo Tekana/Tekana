@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tekana</title>
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="color.css">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+
+<script>
+function home(){
+  document.title = "Tekana";
+  document.getElementById("home").style.display = "block";
+  document.getElementById("power").style.display = "none";
+  document.getElementById("track").style.display = "none";
+  document.getElementById("homeif").style.display = "none";
+  document.getElementById("homeli").style.display = "block";
+}
+function power(){
+  document.title = "Login";
+  document.getElementById("home").style.display = "none";
+  document.getElementById("power").style.display = "block";
+  document.getElementById("track").style.display = "none";
+}
+function track(){
+  document.title = "Track";
+  document.getElementById("home").style.display = "none";
+  document.getElementById("power").style.display = "none";
+  document.getElementById("track").style.display = "block";
+}
+function sub(){
+  var a = document.getElementById("shopee").value;
+  var n = a.length;
+  var i,f;
+  a = a.toUpperCase();
+  document.getElementById("shopee").value = a;
+  if(n == 12){ // j&T
+    f = 1;
+    for(i = 0;i < n;i++) if(a[i] > '9' || a[i] < '0') f = 0;
+    if(f){
+      document.getElementById("web").src = "about:blank";
+      window.open("https://www.jtexpress.co.th/index/query/gzquery.html?bills="+a, '_blank');
+    }
+  }
+  else{ if(n == 13){ // ninja van, kerry shp
+    f = 1;
+    if(!(a[0] == 'S' && a[1] == 'H' && a[2] == 'N' && a[3] == 'V')) f = 0;
+    for(i = 4;i < n;i++) if(a[i] > '9' || a[i] < '0') f = 0;
+    if(f){
+      document.getElementById("web").src = "about:blank";
+      window.open("https://www.ninjavan.co/th-th/tracking?id="+a, '_blank');
+    }
+    f = 1;
+    if(!(a[0] == 'S' && a[1] == 'H' && a[2] == 'P')) f = 0;
+    for(i = 3;i < n;i++) if(a[i] > '9' || a[i] < '0') f = 0;
+    if(f){
+      document.getElementById("web").src = "https://th.kerryexpress.com/th/track/?track="+a;
+    }
+  }
+  else{ if(n == 14){ // kerry dof, shopee, best
+    f = 1;
+    if(!(a[0] == 'S' && a[1] == 'D' && a[2] == 'O' && a[3] == 'F')) f = 0;
+    for(i = 4;i < n;i++) if(a[i] > '9' || a[i] < '0') f = 0;
+    if(f){
+      document.getElementById("web").src = "https://th.kerryexpress.com/th/track/?track="+a;
+    }
+    f = 1;
+    if(!(a[0] == 'T' && a[1] == 'H' && a[n-1] >= 'A' && a[n-1] <= 'Z')) f = 0;
+    for(i = 2;i < n-1;i++) if(a[i] > '9' || a[i] < '0') f = 0;
+    if(f){
+      document.getElementById("web").src = "https://spx.co.th/#/detail/"+a;
+    }
+    f = 1;
+    for(i = 0;i < n;i++) if(a[i] > '9' || a[i] < '0') f = 0;
+    if(f){
+      document.getElementById("web").src = "https://www.best-inc.co.th/track?bills="+a;
+    }
+  }}}
+}
+function o(num){
+  if(num == 1){
+    document.getElementById("homeli").style.display = "none";
+    document.getElementById("homeif").style.display = "block";
+    document.getElementById("homeif").src = "lullar.html";
+  }
+  if(num == 2){
+    document.getElementById("homeli").style.display = "none";
+    document.getElementById("homeif").style.display = "block";
+    document.getElementById("homeif").src = "mod.html";
+  }
+  if(num == 3){
+    document.getElementById("homeli").style.display = "none";
+    document.getElementById("homeif").style.display = "block";
+    document.getElementById("homeif").src = "game.html";
+  }
+  if(num == 4){
+    document.getElementById("homeli").style.display = "none";
+    document.getElementById("homeif").style.display = "block";
+    document.getElementById("homeif").src = "data.html";
+  }
+  if(num == 5){
+    document.getElementById("homeli").style.display = "none";
+    document.getElementById("homeif").style.display = "block";
+    document.getElementById("homeif").src = "encrypt.html";
+  }
+  if(num == 6){
+    document.getElementById("homeli").style.display = "none";
+    document.getElementById("homeif").style.display = "block";
+    document.getElementById("homeif").src = "graph.html";
+  }
+}
+</script>
+<style>
+  div ul li button{
+    width: 500px;
+    font-size: 40px;
+  }
+</style>
+
+</head>
+
+<body>
+<table>
+<tr>
+<th onclick="home()"><p style="text-decoration: underline;">Home</p></th>
+<th onclick="power()"><p style="text-decoration: underline;">Power</p></th>
+<th onclick="track()"><p style="text-decoration: underline;">Track</p></th>
+</tr>
+</table>
+<br>
+
+<div id="home">
+  <div id="homeli" style="font-size:40px;padding: 20px;">
+    <ul style="list-style-type:square;">
+      <strong>Other links</strong><br><br>
+      <li><button onclick="o(1)">Keyboard Changer</button></li>
+      <li><a href="report.html"><button >Report</button></a></li>
+      <li><button onclick="o(2)">Modulo</button></li>
+      <li><button onclick="o(3)">Game</button></li>
+      <li><button onclick="o(4)">Data</button></li>
+      <li><button onclick="o(5)">Encrypt</button></li>
+      <li><button onclick="o(6)">Graph</button></li>
+    </ul> <br>
+    <iframe src="temp.html" height="500" width="800" style="padding:8px"></iframe>
+  </div>
+  <iframe id="homeif" src="about:blank" height="1000" width="100%" style="display: none;"></iframe>
+</div>
+
+<div id="power" style="display: none;">
+  <iframe src="3427/control.html" style="position:fixed; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;"></iframe>
+  <?php include("ip.php"); ?>
+</div>
+
+<div id="track" style="text-align: center;display: none;">
+  <br>
+  <strong style="padding:40px;">Shopee Track</strong><br><br><br>
+	<input type="text" id="shopee" style="width:400px;">
+  <button type="button" onclick="sub()" style="font-size:22px">Submit</button><br><br><br>
+  <iframe id="web" src="about:blank" width="100%" height="1600"></iframe>
+</div>
+
+</body>
+</html>
